@@ -5,6 +5,7 @@ const {
     createPurchase,
     updatePurchase,
     deletePurchase,
+    donationTotal,
     savePurchase
 } = require("./src/purchases")
 
@@ -15,7 +16,7 @@ function processInput() {
     let result = "Error: Command not found";
 
     const item = {};
-    const customerPurchase = (process.argv.slice(3).map((value) => value.split(`=`)));
+    const customerPurchase = (process.argv.slice(3).map((value) => value.split(`:`)));
 
     for (const details of customerPurchase) {
         item[details[0]] = details[1];
@@ -40,6 +41,10 @@ function processInput() {
 
     else if (expectedCommand === "delete") {
         result = deletePurchase(item.id);
+    }
+
+    else if (expectedCommand === "donation") {
+        result = donationTotal();
     }
 
     savePurchase();

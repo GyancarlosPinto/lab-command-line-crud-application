@@ -49,6 +49,15 @@ function deletePurchase(id) {
     return `Error: event with ID ${id} not found`;
   }
 
+// Adds up total donation amount of purchase
+function donationTotal() {
+    let total = 0;
+    purchases.forEach(item => {
+        total += Number(item.donation)
+    });
+    return total.toFixed(2);
+}
+
 // Saves the purchases to purchases.json file for persistence
 function savePurchase() {
     const stringifiedPurchases = JSON.stringify(purchases);
@@ -61,5 +70,6 @@ module.exports = {
     createPurchase,
     updatePurchase,
     deletePurchase,
+    donationTotal,
     savePurchase
 }
